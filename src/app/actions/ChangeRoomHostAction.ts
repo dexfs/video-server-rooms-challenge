@@ -1,5 +1,5 @@
 import { getCustomRepository } from 'typeorm';
-import { NotFound, BadRequest } from '@shared/utils/errors';
+import { NotFound, BadRequest } from '@app/exceptions/errors';
 import RoomRepository from '../repositories/RoomRepository';
 import Room from '../entities/Room';
 
