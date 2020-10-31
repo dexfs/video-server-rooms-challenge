@@ -37,7 +37,7 @@ It's an API for handle users and video rooms.
 ## ❯ Installation
 
 ```bash
-$ yarn
+$ npm
 ```
 
 Database with docker
@@ -60,12 +60,12 @@ $ cp .env.example .env.dev
 
 ```bash
 # migration
-$ yarn typeorm -c development|test migration:run
+$ npm run typeorm migration:run -- -c development|test
 ```
 
 ```bash
 # seed
-$ yarn seed:run -c development|test -s CreateRoomsAndUsers
+$ npm run seed:run -- -c development|test -s CreateRoomsAndUsers
 ```
 > It will create users and rooms data
 
@@ -73,14 +73,14 @@ $ yarn seed:run -c development|test -s CreateRoomsAndUsers
 
 ```bash
 # development
-$ yarn dev:server
+$ npm run dev
 ```
 
 ## ❯ Tests
 
 ```bash
 # running tests
-$ yarn test
+$ npm test
 ```
 > Tests run in memory using sqlite
 
