@@ -28,7 +28,7 @@ class User {
 
   @Column({ select: false, nullable: false })
   @IsNotEmpty()
-  password?: string;
+  password: string;
 
   @Column({ name: 'mobile_token', nullable: true })
   mobileToken: string;
@@ -47,7 +47,8 @@ class User {
 
   @BeforeInsert()
   async setPassword(password: string) {
-    this.password = await hash(password || this.password, 10);
+    const passwordValue = password || this.password;
+    this.password = await hash(passwordValue, 10);
   }
 
   // HOOKS
