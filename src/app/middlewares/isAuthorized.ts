@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import authConfig from '@config/auth';
+import IUserToken from '@app/interfaces/IUserToken';
 
 interface IToken {
-  user: object;
+  user: IUserToken;
 }
 const decodeToken = (token: string) => {
   return verify(token, authConfig.jwt.secret);

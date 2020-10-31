@@ -4,8 +4,8 @@ import AuthenticateAction from '@app/actions/AuthenticateAction';
 class IndexController {
   static async authenticate(request: Request, response: Response) {
     const authenticateAction = new AuthenticateAction();
-    const { user, token } = await authenticateAction.execute(request.body);
-    return response.json({ user, token });
+    const { token } = await authenticateAction.execute(request.body);
+    return response.json({ token });
   }
 }
 
