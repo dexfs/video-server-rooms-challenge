@@ -37,7 +37,7 @@ describe('Rooms Join and Leave - e2e', () => {
     const userRepository = getCustomRepository(UsersRepository);
     const room = rooms[Math.floor(Math.random() * rooms.length)];
     const user = users[Math.floor(Math.random() * users.length)];
-    const token = tokenService.generate(user.id);
+    const token = tokenService.generate(user);
 
     const response = await request
       .post(`/rooms/${room.id}/join`)
@@ -67,7 +67,7 @@ describe('Rooms Join and Leave - e2e', () => {
       roomId: room.id,
     });
 
-    const token = tokenService.generate(user.id);
+    const token = tokenService.generate(user);
 
     const response = await request
       .delete(`/rooms/${room.id}/leave`)
@@ -85,7 +85,7 @@ describe('Rooms Join and Leave - e2e', () => {
   it('it should return 400 when invalid id is sent', async done => {
     expect.assertions(2);
     const user = users[Math.floor(Math.random() * users.length)];
-    const token = tokenService.generate(user.id);
+    const token = tokenService.generate(user);
     let response;
     response = await request
       .post(`/rooms/1/join`)

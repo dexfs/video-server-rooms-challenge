@@ -13,7 +13,6 @@ interface Input {
 }
 
 interface Result {
-  user: User;
   token: string;
 }
 
@@ -38,12 +37,9 @@ class CreateUserAction  extends AbstractAction {
 
     await userRepository.save(user);
 
-    delete user.password;
-
     const tokenService = new TokenService();
-    const token = tokenService.generate(user.id);
+    const token = tokenService.generate(user);
     return {
-      user,
       token,
     };
   }

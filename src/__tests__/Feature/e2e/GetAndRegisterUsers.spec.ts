@@ -65,13 +65,6 @@ describe('Users - e2e', () => {
     expect(response.status).toBe(201);
     expect(response.body).toEqual(
       expect.objectContaining({
-        user: {
-          id: expect.any(String),
-          username: expect.any(String),
-          mobileToken: expect.any(String),
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String),
-        },
         token: expect.any(String),
       }),
     );

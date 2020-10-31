@@ -15,7 +15,6 @@ interface Input {
 type AuthUser = Exclude<User, "password">
 
 interface AuthResult {
-  user: AuthUser;
   token: string;
 }
 
@@ -39,11 +38,8 @@ class AuthenticateAction extends AbstractAction{
     }
 
     const tokenService = new TokenService();
-    const token = tokenService.generate(user.id);
-    // @ts-ignore
-    delete user.password;
+    const token = tokenService.generate(user);
     return {
-      user,
       token,
     };
   }

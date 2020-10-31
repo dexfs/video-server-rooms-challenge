@@ -30,7 +30,7 @@ describe('UserDelete - e2e', () => {
     // expect.assertions(3);
     let response;
 
-    const token = tokenService.generate(users[0].id);
+    const token = tokenService.generate(users[0]);
 
     response = await request
       .delete('/users')

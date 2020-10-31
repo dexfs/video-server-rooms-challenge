@@ -33,7 +33,7 @@ describe('Rooms - e2e', () => {
     expect.assertions(2);
     const room = rooms[Math.floor(Math.random() * rooms.length)];
     const user = users[Math.floor(Math.random() * users.length)];
-    const token = tokenService.generate(room.hostUser?.id);
+    const token = tokenService.generate(room.hostUser);
 
     const response = await request
       .put(`/rooms/change-room-host`)
@@ -51,7 +51,7 @@ describe('Rooms - e2e', () => {
   it('Change Host Room 400 if the same user was sent', async done => {
     expect.assertions(1);
     const room = rooms[Math.floor(Math.random() * rooms.length)];
-    const token = tokenService.generate(room.hostUser?.id);
+    const token = tokenService.generate(room.hostUser);
 
     const response = await request
       .put(`/rooms/change-room-host`)
@@ -68,7 +68,7 @@ describe('Rooms - e2e', () => {
   it('returns 400 when invalid uuid is sent', async done => {
     expect.assertions(1);
     const room = rooms[Math.floor(Math.random() * rooms.length)];
-    const token = tokenService.generate(room.hostUser?.id);
+    const token = tokenService.generate(room.hostUser);
 
     const response = await request
       .put(`/rooms/change-room-host`)

@@ -18,10 +18,7 @@ describe('CreateUserAction', () => {
       password: '123456',
     });
 
-    expect(result).toHaveProperty('user');
     expect(result).toHaveProperty('token');
-    expect(result.user).not.toBeNull();
-    expect(result.user).not.toHaveProperty('password');
     expect(result.token).not.toBeNull();
   });
 

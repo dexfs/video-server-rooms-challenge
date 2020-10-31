@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 
 interface IToken {
-  sub: string;
+  user: object;
 }
 const decodeToken = (token: string) => {
   return verify(token, authConfig.jwt.secret);
@@ -23,9 +23,7 @@ const isAuthorized = (
   try {
     const [, token] = requestToken.split(' ');
     const decoded = decodeToken(token) as IToken;
-    request.user = {
-      id: decoded.sub,
-    };
+    request.user = decoded.user;
     next();
   } catch (error) {
     return response.status(401).json({ message: 'Invalid token!' });

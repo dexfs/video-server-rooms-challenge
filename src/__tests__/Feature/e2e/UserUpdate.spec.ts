@@ -30,7 +30,7 @@ describe('UserUpdate - e2e', () => {
     expect.assertions(3);
     let response;
 
-    const token = tokenService.generate(users[0].id);
+    const token = tokenService.generate(users[0]);
 
     response = await request
       .put('/users')
@@ -68,7 +68,7 @@ describe('UserUpdate - e2e', () => {
   it('should return 400 when invalid payload is sent', async done => {
     expect.assertions(3);
     let response;
-    const token = tokenService.generate(users[0].id);
+    const token = tokenService.generate(users[0]);
 
     response = await request
       .put('/users')
