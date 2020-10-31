@@ -11,9 +11,10 @@ interface Input {
   password: string;
 }
 
+type AuthUser = Exclude<User, "password">
 
 interface AuthResult {
-  user: User;
+  user: AuthUser;
   token: string;
 }
 
@@ -30,9 +31,7 @@ class AuthenticateAction {
       throw new Unauthorized('Your username and/or password do not match.');
     }
 
-    const userPassword = user.password || '';
-    const isCorrectPassword = await compare(password, userPassword);
-    delete user.password;
+    const isCorrectPassword = await compare(password, user.password);
 
     if (!isCorrectPassword) {
       throw new Unauthorized('Your username and/or password do not match.');
@@ -40,7 +39,8 @@ class AuthenticateAction {
 
     const tokenService = new TokenService();
     const token = tokenService.generate(user.id);
-
+    // @ts-ignore
+    delete user.password;
     return {
       user,
       token,
