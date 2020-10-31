@@ -1,6 +1,6 @@
 import Faker from 'faker';
 import { define } from 'typeorm-seeding';
-import User from '@modules/users/entities/User';
+import User from '@app/entities/User';
 
 define(User, (faker: typeof Faker) => {
   const username = faker.internet.userName();

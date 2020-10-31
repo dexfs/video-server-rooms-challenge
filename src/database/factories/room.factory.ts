@@ -1,7 +1,7 @@
 import Faker from 'faker';
 import { define, factory } from 'typeorm-seeding';
-import Room from '@modules/rooms/entities/Room';
-import User from '@modules/users/entities/User';
+import Room from '@app/entities/Room';
+import User from '@app/entities/User';
 
 define(Room, (faker: typeof Faker) => {
   const room = new Room();

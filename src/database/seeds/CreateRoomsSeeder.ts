@@ -1,8 +1,8 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
-import Room from '@modules/rooms/entities/Room';
-import RoomParticipant from '@modules/rooms/entities/RoomParticipant';
-import User from '@modules/users/entities/User';
+import Room from '@app/entities/Room';
+import RoomParticipant from '@app/entities/RoomParticipant';
+import User from '@app/entities/User';
 
 export default class CreateRoomsAndUsers implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
