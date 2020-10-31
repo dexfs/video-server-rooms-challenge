@@ -2,7 +2,7 @@ import { getCustomRepository } from 'typeorm';
 
 import UserRepository from '@app/repositories/UsersRepository';
 import TokenService from '@app/services/tokenService';
-import { GeneralError } from '@shared/utils/errors';
+import { GeneralError } from '@app/exceptions/errors';
 import User from '@app/entities/User';
 
 interface Input {

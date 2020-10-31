@@ -2,7 +2,7 @@ import { getCustomRepository } from 'typeorm';
 import { compare, hash } from 'bcryptjs';
 
 import UserRepository from '@app/repositories/UsersRepository';
-import { BadRequest, NotFound } from '@shared/utils/errors';
+import { BadRequest, NotFound } from '@app/exceptions/errors';
 import User from '@app/entities/User';
 
 interface Input {

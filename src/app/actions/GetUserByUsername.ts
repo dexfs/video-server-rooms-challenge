@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 
 import UsersRepository from '@app/repositories/UsersRepository';
-import { NotFound } from '@shared/utils/errors';
+import { NotFound } from '@app/exceptions/errors';
 import User from '@app/entities/User';
 
 interface Input {

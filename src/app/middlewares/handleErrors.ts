@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { ValidationError } from 'express-validation';
-import { GeneralError } from '@shared/utils/errors';
+import { GeneralError } from '@app/exceptions/errors';
 
 export default (
   err: any,

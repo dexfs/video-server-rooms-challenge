@@ -4,7 +4,7 @@ import { compare } from 'bcryptjs';
 import UserRepository from '@app/repositories/UsersRepository';
 import User from '@app/entities/User';
 import TokenService from '@app/services/tokenService';
-import { Unauthorized } from '@shared/utils/errors';
+import { Unauthorized } from '@app/exceptions/errors';
 
 interface Input {
   username: string;
