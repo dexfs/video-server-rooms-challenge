@@ -4,6 +4,7 @@ import UserRepository from '@app/repositories/UsersRepository';
 import TokenService from '@app/services/tokenService';
 import { GeneralError } from '@app/exceptions/errors';
 import User from '@app/entities/User';
+import AbstractAction from './ActionAbstract';
 
 interface Input {
   username: string;
@@ -16,13 +17,13 @@ interface Result {
   token: string;
 }
 
-class CreateUserAction {
+class CreateUserAction  extends AbstractAction {
   public async execute({
     username,
     password,
     mobileToken,
   }: Input): Promise<Result> {
-    const userRepository = getCustomRepository(UserRepository);
+    const {userRepository} = this.loadRepositories();
     const userExists = await userRepository.findByUsername(username);
 
     if (userExists) {
@@ -45,6 +46,12 @@ class CreateUserAction {
       user,
       token,
     };
+  }
+
+  loadRepositories() {
+    return {
+      userRepository: getCustomRepository(UserRepository)
+    }
   }
 }
 

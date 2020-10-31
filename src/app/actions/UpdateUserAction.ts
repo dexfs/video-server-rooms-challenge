@@ -4,6 +4,7 @@ import { compare, hash } from 'bcryptjs';
 import UserRepository from '@app/repositories/UsersRepository';
 import { BadRequest, NotFound } from '@app/exceptions/errors';
 import User from '@app/entities/User';
+import AbstractAction from './ActionAbstract';
 
 interface Input {
   id: string;
@@ -18,14 +19,14 @@ interface IVerifyPassword {
   newPassword: string;
 }
 
-class UpdateUserAction {
+class UpdateUserAction extends AbstractAction{
   public async execute({
     id,
     currentPassword,
     newPassword,
     mobileToken,
   }: Input): Promise<User | undefined> {
-    const userRepository = getCustomRepository(UserRepository);
+    const {userRepository} = this.loadRepositories();
     const userFound = await userRepository.findOne({
       where: { id },
       select: ['id', 'username', 'password'],
@@ -67,6 +68,12 @@ class UpdateUserAction {
       throw new BadRequest('Current password is not valid.');
     }
     return hash(newPassword, 10);
+  }
+
+  loadRepositories() {
+    return {
+      userRepository: getCustomRepository(UserRepository)
+    }
   }
 }
 

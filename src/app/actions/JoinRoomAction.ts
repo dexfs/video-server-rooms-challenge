@@ -4,18 +4,16 @@ import RoomRepository from '../repositories/RoomRepository';
 import RoomParticipantRepository from '../repositories/RoomParticipantRepository';
 
 import Room from '../entities/Room';
+import AbstractAction from './ActionAbstract';
 
 interface Input {
   userId: string;
   roomId: string;
 }
 
-class JoinRoomAction {
+class JoinRoomAction extends AbstractAction {
   public async execute({ userId, roomId }: Input): Promise<Room | undefined> {
-    const roomRepository = getCustomRepository(RoomRepository);
-    const roomParticipantRepository = getCustomRepository(
-      RoomParticipantRepository,
-    );
+    const {roomRepository, roomParticipantRepository} = this.loadRepositories();
     const room = await roomRepository.findOne(roomId);
 
     if (!room) {
@@ -43,6 +41,13 @@ class JoinRoomAction {
       relations: ['participants'],
       where: { id: roomId },
     });
+  }
+
+  loadRepositories() {
+    return {
+      roomRepository: getCustomRepository(RoomRepository),
+      roomParticipantRepository: getCustomRepository(RoomParticipantRepository)
+    }
   }
 }
 

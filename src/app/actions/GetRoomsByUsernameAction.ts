@@ -2,14 +2,15 @@ import { getCustomRepository } from 'typeorm';
 import UsersRepository from '@app/repositories/UsersRepository';
 import Room from '@app/entities/Room';
 import { NotFound } from '@app/exceptions/errors';
+import AbstractAction from './ActionAbstract';
 
 interface Input {
   username: string;
 }
 
-class GetRoomsByUsername {
+class GetRoomsByUsername extends AbstractAction {
   public async execute({ username }: Input): Promise<Room[][]> {
-    const usersRepository = getCustomRepository(UsersRepository);
+    const { usersRepository } = this.loadRepositories();
     const user = await usersRepository.findByUsername(username, {
       relations: ['rooms', 'rooms.room'],
     });
@@ -24,6 +25,11 @@ class GetRoomsByUsername {
     }, []);
 
     return rooms;
+  }
+  loadRepositories() {
+    return {
+      usersRepository: getCustomRepository(UsersRepository)
+    }
   }
 }
 

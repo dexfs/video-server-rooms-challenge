@@ -5,6 +5,7 @@ import UserRepository from '@app/repositories/UsersRepository';
 import User from '@app/entities/User';
 import TokenService from '@app/services/tokenService';
 import { Unauthorized } from '@app/exceptions/errors';
+import AbstractAction from './ActionAbstract';
 
 interface Input {
   username: string;
@@ -19,9 +20,9 @@ interface AuthResult {
 }
 
 
-class AuthenticateAction {
+class AuthenticateAction extends AbstractAction{
   async execute({ username, password }: Input): Promise<AuthResult> {
-    const userRepository = getCustomRepository(UserRepository);
+    const {userRepository} = this.loadRepositories();
     const user = await userRepository.findOne({
       where: { username },
       select: ['id', 'username', 'password'],
@@ -45,6 +46,11 @@ class AuthenticateAction {
       user,
       token,
     };
+  }
+  loadRepositories() {
+    return {
+      userRepository: getCustomRepository(UserRepository)
+    }
   }
 }
 
