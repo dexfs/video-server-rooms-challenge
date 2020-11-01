@@ -75,6 +75,16 @@ $ npm run seed:run -- -c development|test -s CreateRoomsAndUsers
 # development
 $ npm run dev
 ```
+## ❯ Running the app with Docker
+```bash
+# development
+$ docker-compose ud -d
+
+# OR with visible logs
+$ docker-compose up
+```
+
+
 
 ## ❯ Tests
 
