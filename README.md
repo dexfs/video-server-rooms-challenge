@@ -78,7 +78,7 @@ $ npm run dev
 ## ❯ Running the app with Docker
 ```bash
 # development
-$ docker-compose ud -d
+$ docker-compose up -d
 
 # OR with visible logs
 $ docker-compose up
